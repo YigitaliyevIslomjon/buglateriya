@@ -1,0 +1,17 @@
+package uz.org
+
+enum class CalculationType {
+    VACATION,
+    SALARY
+}
+
+enum class ErrorCode(val code: Int) {
+    REGION_NOT_FOUND(100),
+    REGION_EXIST(101),
+    REGION_NAME_INVALID(102),
+    ORGANIZATION_NOT_FOUND(103),
+    EMPLOYEE_NOT_FOUND(104),
+    PINFL_ORGANIZATION_EXIST(105),
+    CALCULATION_TABLE_EXIST(106),
+    ORGANIZATION_NOT_CONNECTED_EMPLOYEE(107)
+}
