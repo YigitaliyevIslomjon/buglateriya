@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 
 @ControllerAdvice
 class ExceptionControllerAdvice(
-//    private val errorMessageSource: ResourceBundleMessageSource
 ) {
 
     @ExceptionHandler(BaseException::class)

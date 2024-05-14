@@ -1,8 +1,8 @@
 package uz.org
 
-import jakarta.persistence.Entity
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDate
 
 const val API_PREFIX = "api/v1"
 
@@ -99,4 +101,17 @@ class CalculationTableController(
 
     @GetMapping()
     fun getAll(pageable: Pageable) = calculationTableService.getAll(pageable)
+
+    @GetMapping("all-rate")
+    fun getAllRate(pageable: Pageable, @RequestParam("date") @DateTimeFormat(pattern = "yyyy.MM.dd") date: LocalDate, @RequestParam("rate") rate: Double) = calculationTableService.getAllRate(pageable,date, rate)
+
+    @GetMapping("diffrent-region")
+    fun getAllDifferentRegion(pageable: Pageable, @RequestParam("date") @DateTimeFormat(pattern = "yyyy.MM.dd") date: LocalDate) = calculationTableService.getAllDifferentRegion(date)
+
+    @GetMapping("child-organization")
+    fun getAllChildOrganization(pageable: Pageable, @RequestParam("date") @DateTimeFormat(pattern = "yyyy.MM.dd") date: LocalDate, @RequestParam("organizationId") organizationId: Long) = calculationTableService.getAllChildOrganization(date, organizationId)
+
+    @GetMapping("employee-info")
+    fun getAllEmployeeInfo(pageable: Pageable, @RequestParam("date") @DateTimeFormat(pattern = "yyyy.MM.dd") date: LocalDate) = calculationTableService.getAllEmployeeInfo(date)
+
 }

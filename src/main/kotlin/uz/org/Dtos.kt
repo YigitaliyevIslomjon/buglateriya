@@ -1,7 +1,5 @@
 package uz.org
 
-import jakarta.validation.constraints.NotNull
-import org.hibernate.validator.internal.util.privilegedactions.GetResource
 import java.math.BigDecimal
 import java.time.LocalDate
 
@@ -34,15 +32,15 @@ data class GetRegionDto(
 data class CreateOrganizationDto(
     val name: String,
     val regionId: Long,
-    val parent: Organization?,
+    val parentId: Long?,
 ) {
-    fun toEntity(region: Region) = Organization(name, region, parent)
+    fun toEntity(region: Region, organization: Organization?) = Organization(name, region, organization)
 }
 
 data class UpdateOrganizationDto(
     val name: String?,
     val regionId: Long?,
-    val parent: Organization?,
+    val parentId: Long?,
 )
 
 data class GetOrganizationDto(
@@ -101,7 +99,7 @@ data class CreateCalculationTableDto(
     val amount: BigDecimal,
     val rate: Double,
     val date: LocalDate,
-    @field:NotNull val organizationId: Long,
+    val organizationId: Long,
     val calculationType: CalculationType,
 ) {
     fun toEntity(employee: Employee, organization: Organization) =
@@ -132,3 +130,33 @@ data class GetCalculationTableDto(
         }
     }
 }
+
+data class GetAllRateDto(
+    var pinfl: Long? = null,
+    var allRate: Double? = null
+)
+
+data class GetDifferentRegionDto(
+    var allOrganization: Long? = null,
+    var allAmount: Double? = null
+)
+
+data class GetChildOrganizationsDto(
+    var employeeId: Long? = null,
+    var fullName: String? = null,
+    var organizationId: Long? = null,
+    var organizationName: String? = null,
+    var parentId: Long? = null,
+    var amount: Double? = null,
+    var date: LocalDate? = null
+)
+
+data class GetEmployeeInfoDto(
+    var fullName: String? = null,
+    var orgnizationName: String? = null,
+    var amount: Double? = null,
+    var calculationType: CalculationType? = null,
+    var date: LocalDate? = null,
+)
+
+
